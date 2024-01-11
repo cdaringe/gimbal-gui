@@ -1,0 +1,7 @@
+# pathDefaults:
+#   publishUser: squirrel
+#   publishPass: squirrel
+paths:
+  proxied:
+    # url of the source stream, in the format rtsp://user:pass@host:port/path
+    source: rtsp://squirrel:squirrel@192.168.3.223:554/stream2
