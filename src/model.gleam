@@ -2,9 +2,11 @@ import plinth/javascript/global.{set_timeout}
 import lustre/effect
 import gleam/bool
 import gleam/int
+import gleam/uri.{type Uri}
 
 pub type Model {
   Model(
+    gimbal_url: Result(Uri, Nil),
     connected: Bool,
     history: List(String),
     is_streaming: Bool,

@@ -7,6 +7,11 @@ import lustre/effect
 import c/header.{header}
 import c/pan_tilt_control.{pan_tilt_control}
 import gleam/string
+import gleam/uri
+import gleam/list
+import gleam/result
+import gleam/option
+import plinth/browser/window
 import model.{type Model, ConnectionChanged, Model, StartStream, update}
 
 pub fn main() {
@@ -16,8 +21,24 @@ pub fn main() {
 }
 
 fn init(_) {
+  let gimbal_url: Result(uri.Uri, Nil) = {
+    use window_url <- result.try(uri.parse(window.location()))
+    use query_string <- result.try(option.to_result(window_url.query, Nil))
+    use query_pairs <- result.try(uri.parse_query(query_string))
+    let gimbal_url_param =
+      list.find_map(query_pairs, fn(kv) {
+        let #(key, value) = kv
+        case key {
+          "gimbal_url" -> Ok(value)
+          _ -> Error(Nil)
+        }
+      })
+    use gimbal_url_string <- result.try(gimbal_url_param)
+    uri.parse(gimbal_url_string)
+  }
   #(
     Model(
+      gimbal_url: gimbal_url,
       connected: False,
       history: ["Waiting for stream..."],
       is_streaming: False,
