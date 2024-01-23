@@ -1,23 +1,40 @@
 {
-  "name": "gimbal_gui",
-  "version": "1.0.0",
+  "name": "gimbal-gui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build:app": "gleam format && gleam build",
-    "build:css": "unocss --config ./unocss.config.ts **/*.gleam src/**/*.gleam index.html",
-    "build": "run-p build:*",
-    "start:server": "httpster .",
-    "start:unocss": "run-s 'build:css --watch'",
-    "start:gleam": "npm run build && chokidar '**/*.gleam' -c 'npm run build:app'",
-    "start": "run-p start:*"
+    "build:css": "unocss --config ./unocss.config.ts -o ./src/assets/uno.css **/*.gleam src/**/*.gleam **/*.tsx src/**/*.tsx index.html",
+    "build": "tsc && npm run build:css && vite build",
+    "dev": "run-p dev:*",
+    "dev:vite": "vite",
+    "dev:css": "run-s 'build:css --watch'",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
+    "@esutils/deferred": "0.1.2",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
     "@unocss/cli": "^0.58.3",
+    "@vitejs/plugin-react-swc": "^3.5.0",
     "chokidar-cli": "3.0.0",
-    "httpster": "1.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "mobx": "6.12.0",
+    "mobx-react-lite": "4.0.5",
     "npm-run-all": "4.1.5",
-    "unocss": "^0.58.3"
+    "prettier": "3.2.4",
+    "typescript": "^5.2.2",
+    "unocss": "^0.58.3",
+    "vite": "^5.0.8"
   }
 }

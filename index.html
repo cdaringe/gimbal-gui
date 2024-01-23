@@ -1,27 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>gimbal gui</title>
-    <link rel="stylesheet" href="./normalize.css" />
-    <link rel="stylesheet" href="./uno.css" />
-    <link rel="stylesheet" href="./menu.css" />
+    <link rel="icon" type="image/svg+xml" href="/logo.png" />
   </head>
   <body class="box-border h-dvh">
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" width="367.971" height="436.942" viewBox="0 0 97.359 115.608">
-      <defs>
-          <linearGradient id="a">
-              <stop offset="0" style="stop-color:#343e2c;stop-opacity:1"/>
-              <stop offset="1" style="stop-color:#436428;stop-opacity:1"/>
-          </linearGradient>
-          <linearGradient xlink:href="#a" id="b" x1="52.628" x2="149.987" y1="104.322" y2="104.322" gradientTransform="translate(-52.628 -46.519)" gradientUnits="userSpaceOnUse"/>
-      </defs>
-      <path d="M44.71 115.115c-3.206-1.037-3.189-1.021-23.039-20.892C5.325 77.86 2.344 74.761 1.636 73.388-.05 70.126.004 71.205 0 40.287-.003 20.78.086 11.759.29 10.786c.771-3.701 3.92-7.771 7.205-9.313C10.728-.047 9.429 0 48.679 0s37.952-.046 41.186 1.473c3.285 1.542 6.434 5.612 7.205 9.313.203.973.292 9.995.289 29.5-.004 30.923.049 29.843-1.637 33.102-.707 1.367-3.679 4.466-19.507 20.347-11.893 11.932-19.248 19.115-20.26 19.783-.873.578-2.344 1.285-3.268 1.573-2.184.68-5.915.69-7.976.024" style="fill:url(#b);fill-opacity:1;stroke:none"/>
-  </svg> -->
-    <div id="app" class="max-w-4xl h-full flex flex-col" style="margin: auto">
-      <script
-      type="module"
-      src="./build/dev/javascript/gimbal_gui/gleam.main.mjs"></script>
-
+    <div
+      id="root"
+      class="max-w-4xl h-full flex flex-col"
+      style="margin: auto"
+    ></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

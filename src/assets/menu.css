@@ -64,7 +64,8 @@
     width: 100vw;
     height: 100vh;
 
-    box-shadow: 0 0 0 100vw var(--menu-expand-bg-color),
+    box-shadow:
+      0 0 0 100vw var(--menu-expand-bg-color),
       0 0 0 100vh var(--menu-expand-bg-color);
     border-radius: 0;
   }
