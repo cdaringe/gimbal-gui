@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { PadDir } from "./PadDir";
 import { State } from "./model";
+import { observer } from "mobx-react-lite";
 
 const PAD_STYLES = {
   position: "absolute" as const,
@@ -59,12 +60,8 @@ const PAD_DIRS = [
 
 const ANI_OFF = { key: 0, active: false };
 
-export const PanTiltControl = ({
-  manualControlDegrees,
-}: {
-  manualControlDegrees: State["manualControlDegrees"];
-}) => {
-  const { dpan, dtilt } = manualControlDegrees;
+export const PanTiltControl = observer(({ state }: { state: State }) => {
+  const { dpan, dtilt } = state.manualControlDegrees;
   const [ani, setIsAni] = useState(ANI_OFF);
   useEffect(() => {
     const timeout = setTimeout(() => setIsAni(ANI_OFF), 40);
@@ -89,12 +86,13 @@ export const PanTiltControl = ({
         {PAD_DIRS.map(({ key, tiltDir, panDir, style }) => (
           <PadDir
             {...{
+              key,
               className: `cursor-pointer transition hover:shadow-lg ${ani.key === key && ani.active ? "" : "hover:scale-125"}`,
               style,
               onClick: () => {
                 setIsAni({ key, active: true });
-                // manualControlDegrees.dpan += panDir * 1;
-                // manualControlDegrees.dtilt += tiltDir * 1;
+                state.manualControlDegrees.dpan += panDir * 1;
+                state.manualControlDegrees.dtilt += tiltDir * 1;
               },
             }}
           />
@@ -104,7 +102,7 @@ export const PanTiltControl = ({
         {`Pan ${dpan} ° / click`}
       </label>
       <input
-        onInput={(evt) => {
+        onInput={(_evt) => {
           // let assert Ok(next_int) = int.parse(next)
           // SetManualControlDegrees(#(next_int, tilt))
         }}
@@ -119,7 +117,7 @@ export const PanTiltControl = ({
         {`Tilt ${dtilt} ° / click`}
       </label>
       <input
-        onInput={(evt) => {
+        onInput={(_evt) => {
           // let assert Ok(next_int) = int.parse(next)
           // SetManualControlDegrees(#(next_int, tilt))
         }}
@@ -132,4 +130,4 @@ export const PanTiltControl = ({
       />
     </div>
   );
-};
+});

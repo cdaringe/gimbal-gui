@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import "./assets/normalize.css";
 import "./assets/uno.css";
 import "./assets/menu.css";
-import { useLocationUrl } from "./hooks/location";
+// import { useLocationUrl } from "./hooks/location";
 import { State } from "./model";
 import { Header } from "./Header";
 import { PanTiltControl } from "./PanTiltControl";
@@ -11,10 +11,10 @@ import { observer } from "mobx-react-lite";
 import { Connection } from "./Connection";
 
 const App = observer(({ state }: { state: State }) => {
-  const _url = useLocationUrl();
+  // const _url = useLocationUrl();
 
   useEffect(() => {
-    if (!state.is_streaming) return;
+    if (!state.isFakeStreaming) return;
     const interval = setInterval(() => {
       const [p, t] = ([Math.random(), Math.random()] as const).map((x) =>
         Math.floor(x * 100)
@@ -24,7 +24,7 @@ const App = observer(({ state }: { state: State }) => {
     return () => {
       clearInterval(interval);
     };
-  }, [state.is_streaming]);
+  }, [state.isFakeStreaming]);
 
   return (
     <div
@@ -33,9 +33,9 @@ const App = observer(({ state }: { state: State }) => {
         margin: "0 auto",
       }}
     >
-      <Header />
+      <Header state={state} />
       <main className="p-2">
-        <Connection className="mb-2" state={state} />
+        {state.connected ? null : <Connection className="mb-2" state={state} />}
         <div className="flex flex-wrap w-full">
           <div className="flex flex-col flex-1 h-96 min-w-128">
             <pre className="border-box m-0 flex-1 block w-full block p-2 bg-slate-200 rounded">
@@ -55,15 +55,16 @@ const App = observer(({ state }: { state: State }) => {
           <div>
             <button
               className="flex-initial"
+              disabled={!state.connected}
               onClick={() => {
-                state.is_streaming = !state.is_streaming;
+                state.isFakeStreaming = !state.isFakeStreaming;
               }}
             >
               Stream fake
             </button>
           </div>
         </div>
-        <PanTiltControl manualControlDegrees={state.manualControlDegrees} />
+        <PanTiltControl state={state} />
       </main>
     </div>
   );

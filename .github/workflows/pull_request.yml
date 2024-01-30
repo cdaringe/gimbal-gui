@@ -1,0 +1,30 @@
+name: pull-request
+on: [pull_request]
+
+jobs:
+  build:
+    env:
+      NEXT_PUBLIC_BASE_PATH: /programming-language-selector
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v1.4.4
+        with:
+          node-version: 20.3.0
+          registry-url: "https://registry.npmjs.org"
+      - name: Install pnpm
+        run: npm install -g pnpm@8.6.2
+      - name: Install and Test
+        run: |
+          pnpm install
+          pnpm format:check
+          pnpm typecheck
+          pnpm build
+          echo "inspecting exported out dir"
+          ls -al ./out
+          echo "adding .nojekyll"
+          touch ./out/.nojekyll
+          ls -al out/.nojekyll

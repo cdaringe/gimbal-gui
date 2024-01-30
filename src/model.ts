@@ -6,7 +6,7 @@ export class State {
   gimbalUrl = "";
   connected = false;
   history: string[] = [];
-  is_streaming = false;
+  isFakeStreaming = false;
   manualControlDegrees = { dpan: 5, dtilt: 5 };
 
   commandQueue = {

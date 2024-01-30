@@ -1,6 +1,10 @@
+import { observer } from "mobx-react-lite";
+import { LED } from "./Led";
 import logo from "./assets/logo.png";
+import { isDev } from "./constants";
+import { State } from "./model";
 
-export const Header = () => {
+export const Header = observer(({ state }: { state: State }) => {
   return (
     <header className="shadow flex w-full p-0 justify-center items-center m-0">
       <img className="block flex-initial p-1 h-12 w-12" src={logo} alt="logo" />
@@ -9,6 +13,16 @@ export const Header = () => {
         id="menu-items"
         className="flex-1 hidden md:flex gap-2 list-none p-0"
       />
+      {state.connected ? (
+        <LED
+          ledColor="green"
+          onClick={() => {
+            if (isDev) {
+              state.connected = false;
+            }
+          }}
+        />
+      ) : null}
       <img
         className={"block flex-initial w-12 h-12 rounded-full mx-auto p-1"}
         src={"https://static.cdaringe.com/c/pub/img/headshot.jpeg"}
@@ -37,4 +51,4 @@ export const Header = () => {
       </div>
     </header>
   );
-};
+});
