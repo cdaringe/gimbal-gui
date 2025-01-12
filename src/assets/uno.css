@@ -5,9 +5,12 @@
 .absolute{position:absolute;}
 .relative{position:relative;}
 .m-0{margin:0;}
+.m-1{margin:0.25rem;}
 .m-2{margin:0.5rem;}
+.m15\.978{margin:3.9945rem;}
 .mx-auto{margin-left:auto;margin-right:auto;}
 .mb-2{margin-bottom:0.5rem;}
+.mt-2{margin-top:0.5rem;}
 .box-border{box-sizing:border-box;}
 .inline{display:inline;}
 .block{display:block;}
@@ -34,11 +37,13 @@
 .flex-initial{flex:0 1 auto;}
 .flex-col{flex-direction:column;}
 .flex-wrap{flex-wrap:wrap;}
+.hover\:rotate-90:hover{--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-rotate:90deg;transform:translateX(var(--un-translate-x)) translateY(var(--un-translate-y)) translateZ(var(--un-translate-z)) rotate(var(--un-rotate)) rotateX(var(--un-rotate-x)) rotateY(var(--un-rotate-y)) rotateZ(var(--un-rotate-z)) skewX(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z));}
 .hover\:scale-125:hover{--un-scale-x:1.25;--un-scale-y:1.25;transform:translateX(var(--un-translate-x)) translateY(var(--un-translate-y)) translateZ(var(--un-translate-z)) rotate(var(--un-rotate)) rotateX(var(--un-rotate-x)) rotateY(var(--un-rotate-y)) rotateZ(var(--un-rotate-z)) skewX(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z));}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .animate-spin,
 [animate-spin=""]{animation:spin 1s linear infinite;}
 .cursor-pointer{cursor:pointer;}
+.hover\:cursor-pointer:hover{cursor:pointer;}
 .list-none{list-style-type:none;}
 .items-center{align-items:center;}
 .justify-center{justify-content:center;}
@@ -46,18 +51,22 @@
 .border-1{border-width:1px;}
 .border-blue-500{--un-border-opacity:1;border-color:rgb(59 130 246 / var(--un-border-opacity));}
 .border-blue-800{--un-border-opacity:1;border-color:rgb(30 64 175 / var(--un-border-opacity));}
+.border-yellow-800{--un-border-opacity:1;border-color:rgb(133 77 14 / var(--un-border-opacity));}
 .rounded{border-radius:0.25rem;}
 .rounded-full{border-radius:9999px;}
 .rounded-sm{border-radius:0.125rem;}
 .bg-blue-500{--un-bg-opacity:1;background-color:rgb(59 130 246 / var(--un-bg-opacity));}
 .bg-slate-200{--un-bg-opacity:1;background-color:rgb(226 232 240 / var(--un-bg-opacity));}
+.bg-yellow-100{--un-bg-opacity:1;background-color:rgb(254 249 195 / var(--un-bg-opacity));}
 .hover\:bg-blue-800:hover{--un-bg-opacity:1;background-color:rgb(30 64 175 / var(--un-bg-opacity));}
 .fill-blue-600,
 [fill-blue-600=""]{--un-fill-opacity:1;fill:rgb(37 99 235 / var(--un-fill-opacity));}
+[stroke~="\#1C274C"]{--un-stroke-opacity:1;stroke:rgb(28 39 76 / var(--un-stroke-opacity));}
 .p-0{padding:0;}
 .p-1{padding:0.25rem;}
 .p-2{padding:0.5rem;}
 .pr-4{padding-right:1rem;}
+.text-center{text-align:center;}
 .indent-1{text-indent:0.25rem;}
 .dark .dark\:text-gray-600,
 .dark [dark\:text-gray-600=""]{--un-text-opacity:1;color:rgb(75 85 99 / var(--un-text-opacity));}
@@ -68,6 +77,7 @@
 .shadow{--un-shadow:var(--un-shadow-inset) 0 1px 3px 0 var(--un-shadow-color, rgb(0 0 0 / 0.1)),var(--un-shadow-inset) 0 1px 2px -1px var(--un-shadow-color, rgb(0 0 0 / 0.1));box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .shadow-lg{--un-shadow:var(--un-shadow-inset) 0 10px 15px -3px var(--un-shadow-color, rgb(0 0 0 / 0.1)),var(--un-shadow-inset) 0 4px 6px -4px var(--un-shadow-color, rgb(0 0 0 / 0.1));box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .hover\:shadow-lg:hover{--un-shadow:var(--un-shadow-inset) 0 10px 15px -3px var(--un-shadow-color, rgb(0 0 0 / 0.1)),var(--un-shadow-inset) 0 4px 6px -4px var(--un-shadow-color, rgb(0 0 0 / 0.1));box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
+.hover\:shadow-xl:hover{--un-shadow:var(--un-shadow-inset) 0 20px 25px -5px var(--un-shadow-color, rgb(0 0 0 / 0.1)),var(--un-shadow-inset) 0 8px 10px -6px var(--un-shadow-color, rgb(0 0 0 / 0.1));box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px;}
 .focus\:ring:focus{--un-ring-width:1px;--un-ring-offset-shadow:var(--un-ring-inset) 0 0 0 var(--un-ring-offset-width) var(--un-ring-offset-color);--un-ring-shadow:var(--un-ring-inset) 0 0 0 calc(var(--un-ring-width) + var(--un-ring-offset-width)) var(--un-ring-color);box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .focus\:ring-blue-600:focus{--un-ring-opacity:1;--un-ring-color:rgb(37 99 235 / var(--un-ring-opacity));}

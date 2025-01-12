@@ -5,6 +5,7 @@ import { LED } from "./Led";
 import { debounce } from "lodash";
 import { isDev } from "./constants";
 import { observer } from "mobx-react-lite";
+import { action } from "mobx";
 
 export const Connection = observer(
   ({
@@ -12,28 +13,33 @@ export const Connection = observer(
     className = "",
     ...rest
   }: HTMLProps<HTMLDivElement> & { state: State }) => {
-    const [url, setUrl] = useState(state.gimbalUrl);
+    const defaultGimbalUrl = useMemo(() => {
+      const gimbalUrl = new URL(window.location.href).searchParams.get(
+        "gimbal_url"
+      );
+      return gimbalUrl
+        ? gimbalUrl.match(/\d+/)
+          ? `http://${gimbalUrl}`
+          : gimbalUrl
+        : "";
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    const [url, setUrl] = useState(defaultGimbalUrl);
     const [isBusy, setIsBusy] = useState(false);
     const getState = useMemo(() => {
       return debounce(
         (url: string) => {
           setIsBusy(true);
+          state.gimbalUrl = url;
           return state
             .client()
             .getState(url)
-            .then((res) => {
-              if (
-                !res.ok ||
-                res.headers.get("content-type") !== "application/json"
-              ) {
-                throw new Error("unsuccesful gimbal state response");
-              }
-              return res.json();
-            })
-            .then((_gimbal) => {
-              state.gimbalUrl = url.trim();
-              state.connected = true;
-            })
+            .then(
+              action(() => {
+                state.gimbalUrl = url.trim();
+                state.connected = true;
+              })
+            )
             .catch((err) => {
               console.warn(err);
             })
@@ -55,6 +61,7 @@ export const Connection = observer(
           className="h-8 min-w-[18rem] rounded-sm border-blue-500 indent-1 text-blue-900 shadow-lg focus:outline-none focus:ring focus:ring-blue-600"
           type="text"
           placeholder="Gimbal URL"
+          defaultValue={defaultGimbalUrl}
           onChange={(evt) => {
             setUrl(evt.currentTarget.value);
           }}
